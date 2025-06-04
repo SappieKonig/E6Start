@@ -1,6 +1,6 @@
 import torch.nn as nn
 
-class SimpleMnistMode:
+class SimpleMnistModel(nn.Module):
     def __init__(self):
         super().__init__()
         self.fc = nn.Linear(28 * 28, 10)
