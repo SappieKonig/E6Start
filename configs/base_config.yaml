@@ -1,0 +1,18 @@
+augmentation:
+  _target_: albumentations.Compose
+  transforms:
+    - _target_: albumentations.Rotate
+      limit: [0, 10]
+    # - _target: albumentations.Normalize
+    #   mean: 0.5
+    #   std: 0.5
+    #   max_pixel_value: 255
+    - _target_: albumentations.ToTensorV2
+
+model:
+  _target_: src.models.simple_mnist_model.SimpleMnistModel
+
+wandb:
+  enabled: true
+  project: "mnist"
+  
