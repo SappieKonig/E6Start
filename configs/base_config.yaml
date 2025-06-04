@@ -1,0 +1,25 @@
+augmentation:
+  # hydra can instantiate objects from strings
+  # this means we can fully specify the object in the config
+  _target_: albumentations.Compose
+  transforms:
+    - _target_: albumentations.Rotate
+      limit: [0, 10]
+    - _target_: albumentations.Normalize
+      mean: 0
+      std: 1
+      max_pixel_value: 255
+    - _target_: albumentations.ToTensorV2
+
+model:
+  _target_: src.models.medium_mnist_model.MediumMnistModel
+
+training:
+  batch_size: 64
+  epochs: 5
+  learning_rate: 0.001
+
+wandb:
+  enabled: true
+  project: "mnist"
+  

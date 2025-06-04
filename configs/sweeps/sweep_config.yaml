@@ -1,0 +1,27 @@
+  program: train.py
+  method: bayes
+  metric:
+    name: train/accuracy
+    goal: maximize
+  parameters:
+    training.learning_rate:
+      values: [0.0001, 0.0005, 0.001, 0.005, 0.01]
+    training.batch_size:
+      values: [16, 32, 64, 128]
+    training.epochs:
+      values: [3, 5, 10, 15]
+    model._target_:
+      values: 
+        - src.models.simple_mnist_model.SimpleMnistModel
+        - src.models.medium_mnist_model.MediumMnistModel
+    augmentation.transforms.0.limit:
+      distribution: uniform
+      min: 0
+      max: 20
+      
+  command:
+    - uv
+    - run
+    - ${program}
+    # crucial so that it works with hydra
+    - ${args_no_hyphens}
